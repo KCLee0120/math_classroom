@@ -131,6 +131,7 @@ body{
   border-radius: 5px;
   background: #2691d9;
   cursor: pointer;
+  color: black;
 }
 .chanllengeList,
 .exerciseList{

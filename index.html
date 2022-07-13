@@ -506,6 +506,7 @@
     var questionNum = document.getElementById("numOfQues");
     var quizQuestionNum = document.getElementById("quizQuestionNum");
     var score = document.getElementById("quizScore");
+    var timeAllowed = 0;
     const option_list = document.querySelector(".option_list");
     const next_btn = document.querySelector("footer .next_btn");
 
@@ -612,7 +613,7 @@
     //------------------------------start chanllenge quiz------------------------//
     function startChallengeQuiz(){
       showMCQuizBox();
-      startTimer(120, document.querySelector('#timer'));
+      startTimer(timeAllowed*60, document.querySelector('#timer'));
     }
 
     //------------------------get question details---------------------//
@@ -624,6 +625,7 @@
     //--------------------get question details from script------------------//
     //Form 2 Chapter 2 Section 1 - Difference of two Squares (DONE)
     function getLv2Ch2Sec1(){
+      timeAllowed = 6;
       var getLv2Ch2Sec1InfoType1 = identityExpansionType1();
       var getLv2Ch2Sec1InfoType2 = identityExpansionType2();
       var getLv2Ch2Sec1InfoType3 = identityExpansionType3();
@@ -699,6 +701,7 @@
 
     //Form 2 Chapter 2 Section 2 - Perfect Square
     function getLv2Ch2Sec2(){
+        timeAllowed = 6;
         var getLv2Ch2Sec2InfoType1 = identityExpansionType11();
         var getLv2Ch2Sec2InfoType2 = identityExpansionType12();
         var getLv2Ch2Sec2InfoType3 = identityExpansionType13();
@@ -780,6 +783,7 @@
 
     //Form 2 Chapter 2 Section 3 - Common Factor (DONE)
     function getLv2Ch2Sec3(){
+      timeAllowed = 6;
       var getLv2Ch2Sec3InfoType1 = commonFactorType1();
       var getLv2Ch2Sec3InfoType2 = commonFactorType2();
       var getLv2Ch2Sec3InfoType3 = commonFactorType3();
@@ -868,6 +872,7 @@
 
     //Form 2 Chapter 2 Section 4 - Grouping Terms Method
     function getLv2Ch2Sec4(){
+      timeAllowed = 8;
       var getLv2Ch2Sec4InfoType1 = groupingFactorType1();
       var getLv2Ch2Sec4InfoType2 = groupingFactorType2();
       var getLv2Ch2Sec4InfoType3 = groupingFactorType3();
@@ -935,6 +940,7 @@
 
     //Form 2 Chapter 2 Section 5 - Identity Expansion Revision
     function getLv2Ch2Sec5(){
+      timeAllowed = 6;
       var getLv2Ch2Sec5InfoType1 = identityExpansionType1();
       var getLv2Ch2Sec5InfoType2 = identityExpansionType11();
       var getLv2Ch2Sec5InfoType3 = identityExpansionType12();
@@ -1016,6 +1022,7 @@
 
     //Form 2 Chapter 2 Section 6 - Simple Factorization Revision
     function getLv2Ch2Sec6(){
+      timeAllowed = 8;
       var getLv2Ch2Sec6InfoType1 = commonFactorType2();
       var getLv2Ch2Sec6InfoType2 = commonFactorType3();
       var getLv2Ch2Sec6InfoType3 = commonFactorType4();

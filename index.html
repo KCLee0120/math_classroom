@@ -68,7 +68,7 @@
   <div id="modeOption" class="modeOption">
     <button id="exerciseBtn" class="exerciseModeBtn" disabled = "true"><i class="fa fa-pencil-square-o"></i> 日常練習</button>
     <br>
-    <button id="challengeBtn" class="chanllengeModeBtn"><i class="fa fa-trophy"></i> 限時挑戰</button>
+    <button id="challengeBtn" class="chanllengeModeBtn"><i class="fa fa-trophy"></i> 限時挑戰 </button>
   </div>
 
   <!-- user select topic in exercise mode -->
@@ -496,8 +496,14 @@
           level: 2,
           chapterNo: 2,
           topic: "恆等式及因式分解",
-          section: ["恆等式展開(平方差)", "恆等式展開(完全平方)" ,"簡易因式分解(提取公因式)", "簡易因式分解(拼項法)", "恆等式因式分解(平方差)", "恆等式因式分解(完全平方)" , "恆等式展開(總複習)", "簡易因式分解(總複習)", "恆等式因式分解(總複習)"],
+          section: ["恆等式展開(平方差)", "恆等式展開(完全平方)"  ,"簡易因式分解(提取公因式)", "簡易因式分解(拼項法)", "恆等式因式分解(平方差)", "恆等式因式分解(完全平方)" , "恆等式展開(總複習)", "簡易因式分解(總複習)", "恆等式因式分解(總複習)"],
       },
+      {
+        level: 3,
+        chapterNo: 1,
+        topic: "續多項式的因式分解",
+        section: ["十字相乘法(一)", "十字相乘法(二)", "十字相乘法(三)" ,"較複雜的因式分解"],
+      }
     ];
     //-------------------------------------Interface References-------------------------------------//
     var loginBtn = document.getElementById("loginBtn");
@@ -633,6 +639,7 @@
     }
 
     //--------------------get question details from script------------------//
+
     //Form 2 Chapter 2 Section 1 - Expansion - Difference of two Squares (DONE)
     function getLv2Ch2Sec1(){
       timeAllowed = 6;
@@ -1030,19 +1037,19 @@
       return Lv2Ch2Sec5Question;
     }
 
-    //Form 2 Chapter 2 Section 6 - Factorization - Perfect Square
+    //Form 2 Chapter 2 Section 6 - Factorization - Perfect Square (DONE)
     function getLv2Ch2Sec6(){
       timeAllowed = 6;
-      var getLv2Ch2Sec6InfoType1 = identityFactorizationType1();
-      // var getLv2Ch2Sec6InfoType2 = identityFactorizationType2();
-      // var getLv2Ch2Sec6InfoType3 = identityFactorizationType3();
-      // var getLv2Ch2Sec6InfoType4 = identityFactorizationType4();
-      // var getLv2Ch2Sec6InfoType5 = identityFactorizationType5();
-      // var getLv2Ch2Sec6InfoType6 = identityFactorizationType6();
-      // var getLv2Ch2Sec6InfoType7 = identityFactorizationType7();
-      // var getLv2Ch2Sec6InfoType8 = identityFactorizationType8();
-      // var getLv2Ch2Sec6InfoType9 = identityFactorizationType9();
-      // var getLv2Ch2Sec6InfoType10 = identityFactorizationType10();
+      var getLv2Ch2Sec6InfoType1 = identityFactorizationType11();
+      var getLv2Ch2Sec6InfoType2 = identityFactorizationType12();
+      var getLv2Ch2Sec6InfoType3 = identityFactorizationType13();
+      var getLv2Ch2Sec6InfoType4 = identityFactorizationType14();
+      var getLv2Ch2Sec6InfoType5 = identityFactorizationType15();
+      var getLv2Ch2Sec6InfoType6 = identityFactorizationType16();
+      var getLv2Ch2Sec6InfoType7 = identityFactorizationType17();
+      var getLv2Ch2Sec6InfoType8 = identityFactorizationType18();
+      var getLv2Ch2Sec6InfoType9 = identityFactorizationType19();
+      var getLv2Ch2Sec6InfoType10 = identityFactorizationType20();
 
       let Lv2Ch2Sec6Question = [
           {
@@ -1051,60 +1058,60 @@
           answer: getLv2Ch2Sec6InfoType1.answer,
           options: getLv2Ch2Sec6InfoType1.option
         },
-        //   {
-        //   numb: 2,
-        //   question: "因式分解 " + getLv2Ch2Sec6InfoType2.question + "。",
-        //   answer: getLv2Ch2Sec6InfoType2.answer,
-        //   options: getLv2Ch2Sec6InfoType2.option
-        // },
-        //   {
-        //   numb: 3,
-        //   question: "因式分解 " + getLv2Ch2Sec6InfoType3.question + "。",
-        //   answer: getLv2Ch2Sec6InfoType3.answer,
-        //   options: getLv2Ch2Sec6InfoType3.option
-        // },
-        //   {
-        //   numb: 4,
-        //   question: "因式分解 " + getLv2Ch2Sec6InfoType4.question + "。",
-        //   answer: getLv2Ch2Sec6InfoType4.answer,
-        //   options: getLv2Ch2Sec6InfoType4.option
-        // },
-        //   {
-        //   numb: 5,
-        //   question: "因式分解 " + getLv2Ch2Sec6InfoType5.question + "。",
-        //   answer: getLv2Ch2Sec6InfoType5.answer,
-        //   options: getLv2Ch2Sec6InfoType5.option
-        // },
-        //   {
-        //   numb: 6,
-        //   question: "因式分解 " + getLv2Ch2Sec6InfoType6.question + "。",
-        //   answer: getLv2Ch2Sec6InfoType6.answer,
-        //   options: getLv2Ch2Sec6InfoType6.option
-        // },
-        //   {
-        //   numb: 7,
-        //   question: "因式分解 " + getLv2Ch2Sec6InfoType7.question + "。",
-        //   answer: getLv2Ch2Sec6InfoType7.answer,
-        //   options: getLv2Ch2Sec6InfoType7.option
-        // },
-        //   {
-        //   numb: 8,
-        //   question: "因式分解 " + getLv2Ch2Sec6InfoType8.question + "。",
-        //   answer: getLv2Ch2Sec6InfoType8.answer,
-        //   options: getLv2Ch2Sec6InfoType8.option
-        // },
-        //   {
-        //   numb: 9,
-        //   question: "因式分解 " + getLv2Ch2Sec6InfoType9.question + "。",
-        //   answer: getLv2Ch2Sec6InfoType9.answer,
-        //   options: getLv2Ch2Sec6InfoType9.option
-        // },
-        //   {
-        //   numb: 10,
-        //   question: "因式分解 " + getLv2Ch2Sec6InfoType10.question + "。",
-        //   answer: getLv2Ch2Sec6InfoType10.answer,
-        //   options: getLv2Ch2Sec6InfoType10.option
-        // },
+          {
+          numb: 2,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType2.question + "。",
+          answer: getLv2Ch2Sec6InfoType2.answer,
+          options: getLv2Ch2Sec6InfoType2.option
+        },
+          {
+          numb: 3,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType3.question + "。",
+          answer: getLv2Ch2Sec6InfoType3.answer,
+          options: getLv2Ch2Sec6InfoType3.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType4.question + "。",
+          answer: getLv2Ch2Sec6InfoType4.answer,
+          options: getLv2Ch2Sec6InfoType4.option
+        },
+          {
+          numb: 5,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType5.question + "。",
+          answer: getLv2Ch2Sec6InfoType5.answer,
+          options: getLv2Ch2Sec6InfoType5.option
+        },
+          {
+          numb: 6,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType6.question + "。",
+          answer: getLv2Ch2Sec6InfoType6.answer,
+          options: getLv2Ch2Sec6InfoType6.option
+        },
+          {
+          numb: 7,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType7.question + "。",
+          answer: getLv2Ch2Sec6InfoType7.answer,
+          options: getLv2Ch2Sec6InfoType7.option
+        },
+          {
+          numb: 8,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType8.question + "。",
+          answer: getLv2Ch2Sec6InfoType8.answer,
+          options: getLv2Ch2Sec6InfoType8.option
+        },
+          {
+          numb: 9,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType9.question + "。",
+          answer: getLv2Ch2Sec6InfoType9.answer,
+          options: getLv2Ch2Sec6InfoType9.option
+        },
+          {
+          numb: 10,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType10.question + "。",
+          answer: getLv2Ch2Sec6InfoType10.answer,
+          options: getLv2Ch2Sec6InfoType10.option
+        },
         ];
         quizQuestionNum.innerHTML = " " + Lv2Ch2Sec6Question.length + " ";
         questionNum.innerHTML = " " + Lv2Ch2Sec6Question.length + " ";
@@ -1275,6 +1282,172 @@
         quizTimeLimit.innerHTML = " 8 分鐘 ";
       return Lv2Ch2Sec8Question;
     }
+
+    //Form 2 Chapter 2 Section 9 - Identity Factorization Revision (DONE)
+    function getLv2Ch2Sec9(){
+      timeAllowed = 8;
+      var getLv2Ch2Sec9InfoType1 = identityFactorizationType2();
+      var getLv2Ch2Sec9InfoType2 = identityFactorizationType11();
+      var getLv2Ch2Sec9InfoType3 = identityFactorizationType12();
+      var getLv2Ch2Sec9InfoType4 = identityFactorizationType3();
+      var getLv2Ch2Sec9InfoType5 = identityFactorizationType5();
+      var getLv2Ch2Sec9InfoType6 = identityFactorizationType13();
+      var getLv2Ch2Sec9InfoType7 = identityFactorizationType14();
+      var getLv2Ch2Sec9InfoType8 = identityFactorizationType17();
+      var getLv2Ch2Sec9InfoType9 = identityFactorizationType18();
+      var getLv2Ch2Sec9InfoType10 = identityFactorizationType7()
+
+      let Lv2Ch2Sec9Question = [
+          {
+          numb: 1,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType1.question + "。",
+          answer: getLv2Ch2Sec9InfoType1.answer,
+          options: getLv2Ch2Sec9InfoType1.option
+        },
+          {
+          numb: 2,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType2.question + "。",
+          answer: getLv2Ch2Sec9InfoType2.answer,
+          options: getLv2Ch2Sec9InfoType2.option
+        },
+          {
+          numb: 3,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType3.question + "。",
+          answer: getLv2Ch2Sec9InfoType3.answer,
+          options: getLv2Ch2Sec9InfoType3.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType4.question + "。",
+          answer: getLv2Ch2Sec9InfoType4.answer,
+          options: getLv2Ch2Sec9InfoType4.option
+        },
+          {
+          numb: 5,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType5.question + "。",
+          answer: getLv2Ch2Sec9InfoType5.answer,
+          options: getLv2Ch2Sec9InfoType5.option
+        },
+          {
+          numb: 6,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType6.question + "。",
+          answer: getLv2Ch2Sec9InfoType6.answer,
+          options: getLv2Ch2Sec9InfoType6.option
+        },
+          {
+          numb: 7,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType7.question + "。",
+          answer: getLv2Ch2Sec9InfoType7.answer,
+          options: getLv2Ch2Sec9InfoType7.option
+        },
+          {
+          numb: 8,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType8.question + "。",
+          answer: getLv2Ch2Sec9InfoType8.answer,
+          options: getLv2Ch2Sec9InfoType8.option
+        },
+          {
+          numb: 9,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType9.question + "。",
+          answer: getLv2Ch2Sec9InfoType9.answer,
+          options: getLv2Ch2Sec9InfoType9.option
+        },
+          {
+          numb: 10,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType10.question + "。",
+          answer: getLv2Ch2Sec9InfoType10.answer,
+          options: getLv2Ch2Sec9InfoType10.option
+        },
+        ];
+        quizQuestionNum.innerHTML = " " + Lv2Ch2Sec9Question.length + " ";
+        questionNum.innerHTML = " " + Lv2Ch2Sec9Question.length + " ";
+        quizTimeLimit.innerHTML = " 8 分鐘 ";
+      return Lv2Ch2Sec9Question;
+    }
+
+    //Form 3 Chapter 1 Section 1 - Factorization - Cross Method 1
+    function getLv3Ch1Sec1(){
+      timeAllowed = 8;
+      var question1Info = factorizationCrossMethodOneType1();
+      var question2Info = factorizationCrossMethodOneType2();
+      var question3Info = factorizationCrossMethodOneType3();
+      var question4Info = factorizationCrossMethodOneType4();
+      var question5Info = factorizationCrossMethodOneType5();
+      var question6Info = factorizationCrossMethodOneType6();
+      var question7Info = factorizationCrossMethodOneType7();
+      var question8Info = factorizationCrossMethodOneType8();
+      var question9Info = factorizationCrossMethodOneType9();
+      var question10Info = factorizationCrossMethodOneType10();
+
+      let Lv3Ch1Sec1Question = [
+          {
+          numb: 1,
+          question: "因式分解 " + question1Info.question + "。",
+          answer: question1Info.answer,
+          options: question1Info.option
+        },
+          {
+        numb: 2,
+        question: "因式分解 " + question2Info.question + "。",
+        answer: question2Info.answer,
+        options: question2Info.option
+        },
+          {
+        numb: 3,
+        question: "因式分解 " + question3Info.question + "。",
+        answer: question3Info.answer,
+        options: question3Info.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + question4Info.question + "。",
+          answer: question4Info.answer,
+          options: question4Info.option
+        },
+          {
+          numb: 5,
+          question: "因式分解 " + question5Info.question + "。",
+          answer: question5Info.answer,
+          options: question5Info.option
+        },
+          {
+          numb: 6,
+          question: "因式分解 " + question6Info.question + "。",
+          answer: question6Info.answer,
+          options: question6Info.option
+        },
+          {
+          numb: 7,
+          question: "因式分解 " + question7Info.question + "。",
+          answer: question7Info.answer,
+          options: question7Info.option
+        },
+          {
+          numb: 8,
+          question: "因式分解 " + question8Info.question + "。",
+          answer: question8Info.answer,
+          options: question8Info.option
+        },
+          {
+          numb: 9,
+          question: "因式分解 " + question9Info.question + "。",
+          answer: question9Info.answer,
+          options: question9Info.option
+        },
+          {
+          numb: 10,
+          question: "因式分解 " + question10Info.question + "。",
+          answer: question10Info.answer,
+          options: question10Info.option
+        },
+      ];
+
+        quizQuestionNum.innerHTML = " " + Lv3Ch1Sec1Question.length + " ";
+        questionNum.innerHTML = " " + Lv3Ch1Sec1Question.length + " ";
+        quizTimeLimit.innerHTML = " 8 分鐘 ";
+
+      return Lv3Ch1Sec1Question;
+      }
 
     //-----------------------show question and options------------------//
     function showQuestions(index) {

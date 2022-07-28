@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>因式分解</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAweome CDN Link for Icons -->
+    <script
+  			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  	<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({
+  			tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+  		});
+  	</script>
+
+</head>
+
+<body>
+  <!-- user login -->
+  <div id="loginForm" class="loginForm">
+        <h1>Welcome！</h1>
+        <div class="form" method="post" style="padding-top: 20px;">
+          <div>
+            <div style="margin-bottom: 10px;">
+                <label class="class_selector">選擇你的班別</label>
+                <br>
+                <select class="classBtn" id="class">
+                    <option value="" disabled selected>班別</option>
+                    <option value="T">Teacher</option>
+                    <option value="1A">1A</option><option value="1B">1B</option><option value="1C">1C</option><option value="1D">1D</option><option value="1M">1M</option>
+                    <option value="2A">2A</option><option value="2B">2B</option><option value="2C">2C</option><option value="2D">2D</option><option value="2M">2M</option>
+                    <option value="3A">3A</option><option value="3B">3B</option><option value="3C">3C</option><option value="3D">3D</option><option value="3M">3M</option>
+                    <option value="4A">4A</option><option value="4B">4B</option><option value="4C">4C</option><option value="4D">4D</option>
+                    <option value="5A">5A</option><option value="5B">5B</option><option value="5C">5C</option><option value="5D">5D</option>
+                    <option value="6A">6A</option><option value="6B">6B</option><option value="6C">6C</option><option value="6D">6D</option>
+                </select>
+            </div>
+            <div>
+
+                <label class="class_selector">選擇你的學號</label>
+                <br>
+                <select class="classNoBtn" id="classNo">
+                    <option value="" disabled selected>學號</option>
+                    <option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option>
+                    <option value="5">05</option><option value="6">06</option><option value="7">07</option><option value="8">08</option><option value="9">09</option>
+                    <option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option>
+                    <option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option>
+                    <option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option>
+                    <option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option>
+                    <option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option>
+                </select>
+            </div>
+          </div>
+          <div class="txt_field">
+            <input id="loginPw" type="password">
+            <span></span>
+            <label>在此輸入密碼</label>
+          </div>
+          <button class="loginBtn" id="loginBtn">確定</button>
+        </div>
+      </div>
+
+  <!-- user select mode -->
+  <div id="modeOption" class="modeOption">
+    <button id="exerciseBtn" class="exerciseModeBtn" disabled = "true"><i class="fa fa-pencil-square-o"></i> 日常練習</button>
+    <br>
+    <button id="challengeBtn" class="chanllengeModeBtn"><i class="fa fa-trophy"></i> 限時挑戰 </button>
+  </div>
+
+  <!-- user select topic in exercise mode -->
+  <div id="exerciseList" class="exerciseList">
+      <h3 style="margin-left: 20px; margin-top: 20px;">程度及課題</h3>
+      <p style="margin-bottom: 20px;">_______________________________________</p>
+          <select id="levelSelect" class="levelSelect" onchange="setTopicSelection()">
+            <option value="" disabled selected>選擇程度</option>
+            <option value="1">中一級</option>
+            <option value="2">中二級</option>
+            <option value="3">中三級</option>
+            <option value="4">中四級</option>
+            <option value="5">中五級</option>
+            <option value="6">中六級</option>
+          </select>
+          <br>
+          <select id="TopicSelect" class="TopicSelect" style="display:none;"></select>
+      <button class="TopicSelectBtn" id="backToModeOptionBtn" onclick="backToModeSelection()">返回</button>
+      <button class="TopicSelectBtn" id="TopicSelectBtn">確定</button>
+
+  </div>
+
+  <!-- user select topic in chanllenge mode -->
+  <div id="chanllengeList" class="chanllengeList">
+    <h3 style="margin-left: 20px; margin-top: 20px;">程度及課題</h3>
+    <p style="margin-bottom: 20px;">_______________________________________</p>
+        <select id="levelSelect_cha" class="levelSelect_cha" onchange="setChaTopicSelection()">
+          <option value="0" disabled selected>選擇程度</option>
+          <option value="1">中一級</option>
+          <option value="2">中二級</option>
+          <option value="3">中三級</option>
+          <option value="4">中四級</option>
+          <option value="5">中五級</option>
+          <option value="6">中六級</option>
+        </select>
+        <br>
+        <select id="chaTopicSelect" class="chaTopicSelect" style="display:none;" onchange="setChaTopicSectionSelection()"></select>
+        <br>
+        <select id="chaTopicSectionSelect" class="chaTopicSectionSelect" style="display:none;"></select>
+        <button class="TopicSelectBtn" id="backToModeOptionBtn" onclick="backToModeSelection()">返回</button>
+        <button class="chaTopicSelectBtn" id="chaTopicSelectBtn" onclick="showInfoBox()">確定</button>
+  </div>
+
+  <div id="info_box" class="info_box">
+      <div class="info-title"><span>規則說明</span></div>
+      <div class="info-list">
+          <div class="info">一. 本挑戰共有<span id="numOfQues"> 5分鐘 </span>條問題。</div>
+          <div class="info">二. 整個挑戰的限時為<span id="quizTimeLimit"> 5分鐘 </span>。</div>
+          <div class="info">三. 一旦選擇了答案，便無法作出更改。</div>
+          <div class="info">四. 超過時限後，你便無法回答任何問題。</div>
+          <!-- <div class="info">五. 選擇難度： <select id="difficulty">
+            <option value="1">初階</option>
+            <option value="2">中階</option>
+            <option value="3">進階</option></select>
+          </div> -->
+      </div>
+      <div class="buttons">
+          <button id="quitChaBtn" class="quit">離開</button>
+          <button id="startChaBtn" class="restart">開始挑戰</button>
+      </div>
+  </div>
+
+  <div id="mcQuizBox" class="quiz_box">
+      <header>
+          <div class="title">限時挑戰</div>
+          <div class="timer">
+              <div class="time_left_txt">剩餘時間</div>
+              <div id="timer" class="timer_sec">_ _:_ _</div>
+          </div>
+          <div class="time_line"></div>
+      </header>
+      <section>
+          <div class="que_img">
+            <!-- Here I've inserted question figure from JavaScript -->
+          </div>
+          <div class="que_text">
+              <!-- Here I've inserted question from JavaScript -->
+          </div>
+          <div class="option_list">
+              <!-- Here I've inserted options from JavaScript -->
+          </div>
+          <div class="answerInputBox">
+          </div>
+          <div class="input_respon" id="inputRespon">
+          </div>
+      </section>
+
+      <!-- footer of Quiz Box -->
+      <footer>
+        <button class="submitAnswer_btn" onclick="submitAnswer()">提交</button>
+        <button class="next_btn" onclick="nextQuestionBtn()">下一題</button>
+      </footer>
+
+  </div>
+
+  <div id="resultBox" class="result_box">
+      <div class="icon">
+          <i class="fas fa-crown"></i>
+      </div>
+      <div class="complete_text"><b>你已完成本測驗！</b></div>
+      <div class="score">
+          你答對了 <span id="quizQuestionNum"></span>題中的 <span id="quizScore">0</span>題。
+      </div>
+      <div class="buttons">
+          <button onclick="logout()" class="quit">離開</button>
+      </div>
+  </div>
+
+  <script src="simpleEquation.js"></script>
+  <script src="identityExpansion.js"></script>
+  <script src="simpleFactorization.js"></script>
+  <script src="factorization.js"></script>
+  <script src="polynomialOperation.js"></script>
+
+  <script>
+
+    //--------------Student List-------------//
+    const students_2D = [
+      {
+        numb: 3,
+        name: "周暻寧",
+        pw: "xpq2p3",
+      },
+      {
+        numb: 4,
+        name: "鄭汶臻",
+        pw: "0jlg4w",
+      },
+      {
+        numb: 5,
+        name: "詹承晉",
+        pw: "z43qob",
+      },
+      {
+        numb: 7,
+        name: "李俊華",
+        pw: "sih36q",
+      },
+      {
+        numb: 8,
+        name: "李佩欣",
+        pw: "xza7m1",
+      },
+      {
+        numb: 9,
+        name: "利泳熙",
+        pw: "nrl4fg",
+      },
+      {
+        numb: 10,
+        name: "梁凱茵",
+        pw: "9kdmiw",
+      },
+      {
+        numb: 11,
+        name: "梁樂天",
+        pw: "qbl6lx",
+      },
+      {
+        numb: 12,
+        name: "梁心賢",
+        pw: "27i0m7",
+      },
+      {
+        numb: 13,
+        name: "李傑豪",
+        pw: "os381j",
+      },
+      {
+        numb: 14,
+        name: "盧柏希",
+        pw: "vg1n6q",
+      },
+      {
+        numb: 16,
+        name: "吳晞瑜",
+        pw: "60ff1n",
+      },
+      {
+        numb: 19,
+        name: "施澤棟",
+        pw: "1laqbb",
+      },
+      {
+        numb: 20,
+        name: "杜郁雄",
+        pw: "396d5d",
+      },
+      {
+        numb: 21,
+        name: "謝俊闈",
+        pw: "2bupmf",
+      },
+      {
+        numb: 22,
+        name: "王家濠",
+        pw: "9yryag",
+      },
+      {
+        numb: 23,
+        name: "王藝泓",
+        pw: "ju8rl1",
+      },
+      {
+        numb: 24,
+        name: "黃子澄",
+        pw: "35m3x1",
+      },
+      {
+        numb: 25,
+        name: "邱鈞暘",
+        pw: "yku0ux",
+      },
+      {
+        numb: 26,
+        name: "葉肇熙",
+        pw: "gnex6h",
+      },
+    ];
+    const students_T = [
+      {
+        numb: 0,
+        name: "Lee Kwong Choi",
+        pw: "12313",
+      },
+    ];
+
+    //---------------Topic List-----------------//
+    const topiclist = [
+      {
+        level: 1,
+        chapterNo : 0,
+        topic: "基礎算術重溫",
+        section: ["算術運算", "最小公倍數和最大公因數", "分數和小數", "分數和小數的運算"],
+      },
+      {
+        level: 1,
+        chapterNo : 1,
+        topic: "基礎數學",
+        section: ["續最大公因數和最小公倍數","續算術運算","整除性的判別方法"],
+      },
+      {
+        level: 1,
+        chapterNo : 2,
+        topic: "有向數及數線",
+        section: ["有向數的概念","有向數的加法和減法","有向數的乘法和除法","有向數的四則混合運算",],
+      },
+      {
+        level: 1,
+        chapterNo : 3,
+        topic: "代數簡介",
+        section: ["代數語言","公式和代入法","數列"],
+      },
+      {
+        level: 1,
+        chapterNo : 4,
+        topic: "一元一次方程",
+        section: ["一元一次方程","解方程的進一步技巧","一元一次方程的應用"],
+      },
+      {
+        level: 1,
+        chapterNo : 5,
+        topic: "幾何簡介",
+        section: ["幾何學的基本概念","平面圖形","基本作圖","立體圖形",]
+      },
+      {
+        level: 1,
+        chapterNo : 6,
+        topic: "統計學與統計圖表簡介",
+        section: ["統計學的簡介","簡單的統計圖表","幹葉圖"],
+      },
+      {
+        level: 1,
+        chapterNo : 7,
+        topic: "百分法(一)",
+        section: ["簡閉百分數問題","百分變化","盈利和虧蝕","折扣"],
+      },
+      {
+        level: 1,
+        chapterNo : 8,
+        topic: "近似值與數值估算",
+        section: ["近似值","數值估算"],
+      },
+      {
+        level: 1,
+        chapterNo : 9,
+        topic: "面積與體積(一)",
+        section: ["重溫多邊形的面積","角柱的體積和總表面面積"],
+      },
+      {
+        level: 1,
+        chapterNo : 10,
+        topic: "簡易多項式的運算",
+        section: ["正整數指數定律","多項式","多項式的加法和減法","多項式的乘法"],
+      },
+      {
+        level: 1,
+        chapterNo : 11,
+        topic: "與線相關的角",
+        section: ["與相交線相關的角","與平行線相關的角","平行線的判定"],
+      },
+      {
+        level: 1,
+        chapterNo : 12,
+        topic: "坐標簡介",
+        section: ["直角坐標系統","兩點之間的距離","平面圖形的面積","在直角坐標平面上點的變換"],
+      },
+      {
+        level: 2,
+        chapterNo : 1,
+        topic: "量度的誤差",
+      },
+      {
+        level: 2,
+        chapterNo : 2,
+        topic: "恆等式及因式分解",
+      },
+      {
+        level: 2,
+        chapterNo : 3,
+        topic: "代數分式與公式",
+      },
+      {
+        level: 2,
+        chapterNo : 4,
+        topic: "與直線圖形相關的角",
+      },
+      {
+        level: 2,
+        chapterNo : 5,
+        topic: "全等",
+      },
+      {
+        level: 2,
+        chapterNo : 6,
+        topic: "續統計圖表",
+      },
+      {
+        level: 2,
+        chapterNo : 7,
+        topic: "率, 比及比例",
+      },
+      {
+        level: 2,
+        chapterNo : 8,
+        topic: "相似",
+      },
+      {
+        level: 2,
+        chapterNo : 9,
+        topic: "二元一次方程",
+      },
+      {
+        level: 2,
+        chapterNo : 10,
+        topic: "畢氏定理與無理數",
+      },
+      {
+        level: 2,
+        chapterNo : 11,
+        topic: "面積與體積(二)",
+      },
+      {
+        level: 2,
+        chapterNo : 12,
+        topic: "三角比",
+      },
+      {
+        level: 3,
+        chapterNo : 1,
+        topic: "續多項式的因式分解",
+      },
+      {
+        level: 3,
+        chapterNo : 2,
+        topic: "一元一次不等式",
+      },
+      {
+        level: 3,
+        chapterNo : 3,
+        topic: "百分法(二)",
+      },
+      {
+        level: 3,
+        chapterNo : 4,
+        topic: "三角形的一些特殊的線和中心",
+      },
+      {
+        level: 3,
+        chapterNo : 5,
+        topic: "四邊形",
+      },
+      {
+        level: 3,
+        chapterNo : 6,
+        topic: "續立體圖形",
+      },
+      {
+        level: 3,
+        chapterNo : 7,
+        topic: "面積和體積(三)",
+      },
+      {
+        level: 3,
+        chapterNo : 8,
+        topic: "直線的坐標幾何",
+      },
+      {
+        level: 3,
+        chapterNo : 9,
+        topic: "三角比的關係",
+      },
+      {
+        level: 3,
+        chapterNo : 10,
+        topic: "三角的應用",
+      },
+      {
+        level: 3,
+        chapterNo : 11,
+        topic: "集中趨勢的量度",
+      },
+      {
+        level: 3,
+        chapterNo : 12,
+        topic: "概率簡介",
+      },
+    ];
+
+    const avalibleChanllengeList = [
+      {
+        level: 1,
+        chapterNo: 4,
+        topic: "一元一次方程",
+        section: ["簡易一元一次方程", "解方程的進一步技巧"],
+      },
+      {
+        level: 1,
+        chapterNo: 10,
+        topic: "簡易多項式的運算",
+        section: ["正整數指數定律", "多項式的加法和減法", "多項式的乘法"],
+      },
+      {
+        level: 2,
+        chapterNo: 2,
+        topic: "恆等式及因式分解",
+        section: ["恆等式展開(平方差)", "恆等式展開(完全平方)"  ,"簡易因式分解(提取公因式)", "簡易因式分解(拼項法)", "恆等式因式分解(平方差)", "恆等式因式分解(完全平方)" , "恆等式展開(總複習)", "簡易因式分解(總複習)", "恆等式因式分解(總複習)"],
+      },
+      {
+        level: 2,
+        chapterNo: 3,
+        topic: "代數分式與公式",
+        section: ["簡單代數分式的運算", "公式及代入法", "主項變換"],
+      },
+      {
+        level: 2,
+        chapterNo: 9,
+        topic: "二元一次方程",
+        section: ["解聯立二元一次方程(代入消元法)", "解聯立二元一次方程(加減消元法)"],
+      },
+      {
+        level: 3,
+        chapterNo: 1,
+        topic: "續多項式的因式分解",
+        section: ["十字相乘法(一)", "十字相乘法(二)", "十字相乘法(三)" ,"較複雜的因式分解"],
+      },
+      {
+        level: 3,
+        chapterNo: 2,
+        topic: "整數指數律",
+        section: ["正整數指數律", "零指數和負整數指數"],
+      },
+      {
+        level: 3,
+        chapterNo: 3,
+        topic: "解一元一次不等式",
+        section: ["解一元一次不等式"],
+      }
+    ];
+    //-------------------------------------Interface References-------------------------------------//
+    var loginBtn = document.getElementById("loginBtn");
+    var exerciseBtn = document.getElementById("exerciseBtn");
+    var challengeBtn = document.getElementById("challengeBtn");
+    var startChaBtn = document.getElementById("startChaBtn");
+    var quizTimeLimit = document.getElementById("quizTimeLimit");
+    var questionNum = document.getElementById("numOfQues");
+    var quizQuestionNum = document.getElementById("quizQuestionNum");
+    var score = document.getElementById("quizScore");
+    var timeAllowed = 0;
+    const option_list = document.querySelector(".option_list");
+    const submitAnswer_btn = document.querySelector(".submitAnswer_btn");
+    const next_btn = document.querySelector("footer .next_btn");
+    const inputRespon = document.querySelector(".input_respon");
+
+    //-------------------------------------Assign Events to buttons-------------------------------------//
+    loginBtn.addEventListener('click', login);
+    exerciseBtn.addEventListener('click', exerciseMode);
+    challengeBtn.addEventListener('click', challengeMode);
+    startChaBtn.addEventListener('click', startChallengeQuiz);
+
+    //--------------------------quiz details reference-----------------//
+    var quizDetail;
+    var que_count = 0;
+    var userScore = 0;
+    var mode = "";
+
+    //------------------------login function-----------------------//
+    function login(){
+      var inputClass = document.getElementById("class").value;
+      var inputClassNumber = document.getElementById("classNo").value;
+      var inputPassword = document.getElementById("loginPw").value;
+      if(inputClass==""||inputClassNumber==""){
+        alert("請先選擇班別及學號");
+      }else{
+          for(var i=0; i<eval("students_" + inputClass).length; i++){
+            if(eval("students_" + inputClass)[i].numb == inputClassNumber){
+              if(eval("students_" + inputClass)[i].pw == inputPassword){
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("modeOption").style.display = "block";
+              }else{
+                alert("密碼錯誤")
+              }
+              break;
+            }else if((i+1)==eval("students_" + inputClass).length){
+              alert("此用戶不存在")
+            }
+          }
+      }
+
+    }
+
+    //----------------------User select mode (exercise or challenge)---------------------//
+    function exerciseMode(){
+        document.getElementById("modeOption").style.display="none";
+        document.getElementById("exerciseList").style.display="block";
+    }
+
+    function challengeMode(){
+        document.getElementById("modeOption").style.display="none";
+        document.getElementById("chanllengeList").style.display="block";
+    }
+
+    function backToModeSelection(){
+      document.getElementById("modeOption").style.display="block";
+      document.getElementById("chanllengeList").style.display="none";
+      document.getElementById("exerciseList").style.display="none";
+    }
+
+    //----------------------User select level and topic------------------------------//
+    function setTopicSelection(){
+      document.getElementById("TopicSelect").innerHTML = '<option value="0" disabled selected>選擇課題</option>';
+      for(var i=0; i<topiclist.length; i++){
+        if(document.getElementById("levelSelect").value==topiclist[i].level)
+        document.getElementById("TopicSelect").innerHTML = document.getElementById("TopicSelect").innerHTML + '<option value="' + topiclist[i].chapterNo + '">' + "第 " +  topiclist[i].chapterNo + " 章 - " + topiclist[i].topic + '</option>';
+      }
+      document.getElementById("TopicSelect").style.display = "block";
+    }
+
+    function setChaTopicSelection(){
+      document.getElementById("chaTopicSelect").innerHTML = '<option value="0" disabled selected>選擇課題</option>';
+      for(var i=0; i<avalibleChanllengeList.length; i++){
+        if(document.getElementById("levelSelect_cha").value==avalibleChanllengeList[i].level)
+        document.getElementById("chaTopicSelect").innerHTML = document.getElementById("chaTopicSelect").innerHTML + '<option value="' + avalibleChanllengeList[i].chapterNo + '">' + "第 " +  avalibleChanllengeList[i].chapterNo + " 章 - " + avalibleChanllengeList[i].topic + '</option>';
+      }
+      document.getElementById("chaTopicSelect").style.display = "block";
+      document.getElementById("chaTopicSectionSelect").style.display = "none";
+    }
+
+    function setChaTopicSectionSelection(){
+      document.getElementById("chaTopicSectionSelect").innerHTML = '<option value="0" disabled selected>選擇內容</option>';
+      for(var i=0; i<avalibleChanllengeList.length; i++){
+        if(document.getElementById("levelSelect_cha").value==avalibleChanllengeList[i].level && document.getElementById("chaTopicSelect").value==avalibleChanllengeList[i].chapterNo){
+          for(var j=0; j<avalibleChanllengeList[i].section.length; j++){
+            document.getElementById("chaTopicSectionSelect").innerHTML = document.getElementById("chaTopicSectionSelect").innerHTML + '<option value="' + (j+1) + '">' + avalibleChanllengeList[i].section[j] + '</option>';
+          }
+        }
+      }
+      document.getElementById("chaTopicSectionSelect").style.display = "block";
+    }
+
+    //-----------------------show info box ------------------------//
+    function showInfoBox(){
+      var quizLevel = document.querySelector('#levelSelect_cha').value;
+      var quizChapter = document.querySelector('#chaTopicSelect').value;
+      var quizSection = document.querySelector('#chaTopicSectionSelect').value;
+      if(quizLevel=="0"){
+        alert("請先選擇程度");
+      }else if(quizChapter=="0"){
+        alert("請先選擇課題");
+      }else if(quizSection=="0"){
+        alert("請先選擇內容");
+      }else{
+        document.getElementById("info_box").style.display = "block";
+        document.getElementById("chanllengeList").style.display = "none";
+        getQuizDetails(quizLevel, quizChapter, quizSection);
+      }
+    }
+
+    function showMCQuizBox(){
+      document.getElementById("info_box").style.display = "none";
+      document.getElementById("mcQuizBox").style.display = "block";
+    }
+
+    //------------------------------start chanllenge quiz------------------------//
+    function startChallengeQuiz(){
+      showMCQuizBox();
+      startTimer(timeAllowed*60, document.querySelector('#timer'));
+    }
+
+    //------------------------get question details---------------------//
+    function getQuizDetails(level, chapter, section){
+      quizDetail = eval("getLv" + level + "Ch" + chapter + "Sec" + section + "()");
+      showQuestions(que_count);
+    }
+
+    //--------------------get question details from script------------------//
+    //Form 1 Chapter 4 Section 1 - Solving Simple Linear Equation
+    function getLv1Ch4Sec1(){
+      mode = "input";
+      timeAllowed = 8;
+      var question1Info = simpleEquationType1();
+      var question2Info = simpleEquationType2();
+      var question3Info = simpleEquationType3();
+      var question4Info = simpleEquationType4();
+      var question5Info = simpleEquationType5();
+      var question6Info = simpleEquationType6();
+      var question7Info = simpleEquationType7();
+      var question8Info = simpleEquationType8();
+
+      let questionForQuiz = [
+          {
+          numb: 1,
+          question: "解以下方程：" + question1Info.question,
+          answer: question1Info.answer,
+          numerator: question1Info.numerator,
+          denominator: question1Info.denominator,
+        },
+          {
+          numb: 2,
+          question: "解以下方程：" + question2Info.question,
+          answer: question2Info.answer,
+          numerator: question2Info.numerator,
+          denominator: question2Info.denominator,
+        },
+          {
+          numb: 3,
+          question: "解以下方程：" + question3Info.question,
+          answer: question3Info.answer,
+          numerator: question3Info.numerator,
+          denominator: question3Info.denominator,
+        },
+          {
+          numb: 4,
+          question: "解以下方程：" + question4Info.question,
+          answer: question4Info.answer,
+          numerator: question4Info.numerator,
+          denominator: question4Info.denominator,
+        },
+          {
+          numb: 5,
+          question: "解以下方程：" + question5Info.question,
+          answer: question5Info.answer,
+          numerator: question5Info.numerator,
+          denominator: question5Info.denominator,
+        },
+          {
+          numb: 6,
+          question: "解以下方程：" + question6Info.question,
+          answer: question6Info.answer,
+          numerator: question6Info.numerator,
+          denominator: question6Info.denominator,
+        },
+          {
+          numb: 7,
+          question: "解以下方程：" + question7Info.question,
+          answer: question7Info.answer,
+          numerator: question7Info.numerator,
+          denominator: question7Info.denominator,
+        },
+        {
+        numb: 8,
+        question: "解以下方程：" + question8Info.question,
+        answer: question8Info.answer,
+        numerator: question8Info.numerator,
+        denominator: question8Info.denominator,
+        },
+      ];
+      quizQuestionNum.innerHTML = " " + questionForQuiz.length + " ";
+      questionNum.innerHTML = " " + questionForQuiz.length + " ";
+      quizTimeLimit.innerHTML = " 8 分鐘 ";
+
+      return questionForQuiz;
+    }
+
+    //Form 1 Chapter 10 Section 2 - Polynomial Addition and Subtraction
+    function getLv1Ch10Sec2(){
+      mode = "option";
+      timeAllowed = 8;
+      var question1Info = polynomialAddSubType1();
+      var question2Info = polynomialAddSubType2();
+      var question3Info = polynomialAddSubType3();
+      var question4Info = polynomialAddSubType4();
+
+      let questionForQuiz = [
+          {
+          numb: 1,
+          question: "因式分解 " + question1Info.question + "。",
+          answer: question1Info.answer,
+          options: question1Info.option
+        },
+          {
+          numb: 2,
+          question: "因式分解 " + question2Info.question + "。",
+          answer: question2Info.answer,
+          options: question2Info.option
+        },
+          {
+          numb: 3,
+          question: "因式分解 " + question3Info.question + "。",
+          answer: question3Info.answer,
+          options: question3Info.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + question4Info.question + "。",
+          answer: question4Info.answer,
+          options: question4Info.option
+        },
+        //   {
+        //   numb: 5,
+        //   question: "因式分解 " + question5Info.question + "。",
+        //   answer: question5Info.answer,
+        //   options: question5Info.option
+        // },
+        //   {
+        //   numb: 6,
+        //   question: "因式分解 " + question6Info.question + "。",
+        //   answer: question6Info.answer,
+        //   options: question6Info.option
+        // },
+        //   {
+        //   numb: 7,
+        //   question: "因式分解 " + question7Info.question + "。",
+        //   answer: question7Info.answer,
+        //   options: question7Info.option
+        // },
+        //   {
+        //   numb: 8,
+        //   question: "因式分解 " + question8Info.question + "。",
+        //   answer: question8Info.answer,
+        //   options: question8Info.option
+        // },
+      ];
+
+        quizQuestionNum.innerHTML = " " + questionForQuiz.length + " ";
+        questionNum.innerHTML = " " + questionForQuiz.length + " ";
+        quizTimeLimit.innerHTML = " 8 分鐘 ";
+
+      return questionForQuiz;
+    }
+
+    //Form 2 Chapter 2 Section 1 - Expansion - Difference of two Squares (DONE)
+    function getLv2Ch2Sec1(){
+      mode = "option";
+      timeAllowed = 6;
+      var getLv2Ch2Sec1InfoType1 = identityExpansionType1();
+      var getLv2Ch2Sec1InfoType2 = identityExpansionType2();
+      var getLv2Ch2Sec1InfoType3 = identityExpansionType3();
+      var getLv2Ch2Sec1InfoType4 = identityExpansionType4();
+      var getLv2Ch2Sec1InfoType5 = identityExpansionType5();
+      var getLv2Ch2Sec1InfoType6 = identityExpansionType6();
+      var getLv2Ch2Sec1InfoType7 = identityExpansionType7();
+      var getLv2Ch2Sec1InfoType8 = identityExpansionType8();
+      var getLv2Ch2Sec1InfoType9 = identityExpansionType9();
+
+      let Lv2Ch2Sec1Question = [
+          {
+          numb: 1,
+          question: "展開 " + getLv2Ch2Sec1InfoType1.question + "。",
+          answer: getLv2Ch2Sec1InfoType1.answer,
+          options: getLv2Ch2Sec1InfoType1.option
+        },
+          {
+          numb: 2,
+          question: "展開 " + getLv2Ch2Sec1InfoType2.question + "。",
+          answer: getLv2Ch2Sec1InfoType2.answer,
+          options: getLv2Ch2Sec1InfoType2.option
+        },
+          {
+          numb: 3,
+          question: "展開 " + getLv2Ch2Sec1InfoType3.question + "。",
+          answer: getLv2Ch2Sec1InfoType3.answer,
+          options: getLv2Ch2Sec1InfoType3.option
+        },
+          {
+          numb: 4,
+          question: "展開 " + getLv2Ch2Sec1InfoType4.question + "。",
+          answer: getLv2Ch2Sec1InfoType4.answer,
+          options: getLv2Ch2Sec1InfoType4.option
+        },
+          {
+          numb: 5,
+          question: "展開 " + getLv2Ch2Sec1InfoType5.question + "。",
+          answer: getLv2Ch2Sec1InfoType5.answer,
+          options: getLv2Ch2Sec1InfoType5.option
+        },
+          {
+          numb: 6,
+          question: "展開 " + getLv2Ch2Sec1InfoType6.question + "。",
+          answer: getLv2Ch2Sec1InfoType6.answer,
+          options: getLv2Ch2Sec1InfoType6.option
+        },
+          {
+          numb: 7,
+          question: "展開 " + getLv2Ch2Sec1InfoType7.question + "。",
+          answer: getLv2Ch2Sec1InfoType7.answer,
+          options: getLv2Ch2Sec1InfoType7.option
+        },
+          {
+          numb: 8,
+          question: "展開 " + getLv2Ch2Sec1InfoType8.question + "。",
+          answer: getLv2Ch2Sec1InfoType8.answer,
+          options: getLv2Ch2Sec1InfoType8.option
+        },
+          {
+          numb: 9,
+          question: "展開 " + getLv2Ch2Sec1InfoType9.question + "。",
+          answer: getLv2Ch2Sec1InfoType9.answer,
+          options: getLv2Ch2Sec1InfoType9.option
+        },
+        ];
+        quizQuestionNum.innerHTML = " " + Lv2Ch2Sec1Question.length + " ";
+        questionNum.innerHTML = " " + Lv2Ch2Sec1Question.length + " ";
+        quizTimeLimit.innerHTML = " 6 分鐘 ";
+
+      return Lv2Ch2Sec1Question;
+      }
+
+    //Form 2 Chapter 2 Section 2 - Expansion - Perfect Square (DONE)
+    function getLv2Ch2Sec2(){
+        mode = "option";
+        timeAllowed = 6;
+        var getLv2Ch2Sec2InfoType1 = identityExpansionType11();
+        var getLv2Ch2Sec2InfoType2 = identityExpansionType12();
+        var getLv2Ch2Sec2InfoType3 = identityExpansionType13();
+        var getLv2Ch2Sec2InfoType4 = identityExpansionType14();
+        var getLv2Ch2Sec2InfoType5 = identityExpansionType15();
+        var getLv2Ch2Sec2InfoType6 = identityExpansionType16();
+        var getLv2Ch2Sec2InfoType7 = identityExpansionType17();
+        var getLv2Ch2Sec2InfoType8 = identityExpansionType18();
+        var getLv2Ch2Sec2InfoType9 = identityExpansionType19();
+        var getLv2Ch2Sec2InfoType10 = identityExpansionType20();
+
+        let Lv2Ch2Sec2Question = [
+            {
+            numb: 1,
+            question: "展開 " + getLv2Ch2Sec2InfoType1.question + "。",
+            answer: getLv2Ch2Sec2InfoType1.answer,
+            options: getLv2Ch2Sec2InfoType1.option
+          },
+            {
+            numb: 2,
+            question: "展開 " + getLv2Ch2Sec2InfoType2.question + "。",
+            answer: getLv2Ch2Sec2InfoType2.answer,
+            options: getLv2Ch2Sec2InfoType2.option
+          },
+            {
+            numb: 3,
+            question: "展開 " + getLv2Ch2Sec2InfoType3.question + "。",
+            answer: getLv2Ch2Sec2InfoType3.answer,
+            options: getLv2Ch2Sec2InfoType3.option
+          },
+            {
+            numb: 4,
+            question: "展開 " + getLv2Ch2Sec2InfoType4.question + "。",
+            answer: getLv2Ch2Sec2InfoType4.answer,
+            options: getLv2Ch2Sec2InfoType4.option
+          },
+            {
+            numb: 5,
+            question: "展開 " + getLv2Ch2Sec2InfoType5.question + "。",
+            answer: getLv2Ch2Sec2InfoType5.answer,
+            options: getLv2Ch2Sec2InfoType5.option
+          },
+            {
+            numb: 6,
+            question: "展開 " + getLv2Ch2Sec2InfoType6.question + "。",
+            answer: getLv2Ch2Sec2InfoType6.answer,
+            options: getLv2Ch2Sec2InfoType6.option
+          },
+            {
+            numb: 7,
+            question: "展開 " + getLv2Ch2Sec2InfoType7.question + "。",
+            answer: getLv2Ch2Sec2InfoType7.answer,
+            options: getLv2Ch2Sec2InfoType7.option
+          },
+            {
+            numb: 8,
+            question: "展開 " + getLv2Ch2Sec2InfoType8.question + "。",
+            answer: getLv2Ch2Sec2InfoType8.answer,
+            options: getLv2Ch2Sec2InfoType8.option
+          },
+            {
+            numb: 9,
+            question: "展開 " + getLv2Ch2Sec2InfoType9.question + "。",
+            answer: getLv2Ch2Sec2InfoType9.answer,
+            options: getLv2Ch2Sec2InfoType9.option
+          },
+            {
+            numb: 10,
+            question: "展開 " + getLv2Ch2Sec2InfoType10.question + "。",
+            answer: getLv2Ch2Sec2InfoType10.answer,
+            options: getLv2Ch2Sec2InfoType10.option
+          },
+          ];
+        quizQuestionNum.innerHTML = " " + Lv2Ch2Sec2Question.length + " ";
+        questionNum.innerHTML = " " + Lv2Ch2Sec2Question.length + " ";
+        quizTimeLimit.innerHTML = " 6 分鐘 ";
+        return Lv2Ch2Sec2Question;
+        }
+
+    //Form 2 Chapter 2 Section 3 - Common Factor (DONE)
+    function getLv2Ch2Sec3(){
+      mode = "option";
+      timeAllowed = 6;
+      var getLv2Ch2Sec3InfoType1 = commonFactorType1();
+      var getLv2Ch2Sec3InfoType2 = commonFactorType2();
+      var getLv2Ch2Sec3InfoType3 = commonFactorType3();
+      var getLv2Ch2Sec3InfoType4 = commonFactorType4();
+      var getLv2Ch2Sec3InfoType5 = commonFactorType5();
+      var getLv2Ch2Sec3InfoType6 = commonFactorType6();
+      var getLv2Ch2Sec3InfoType7 = commonFactorType7();
+      var getLv2Ch2Sec3InfoType8 = commonFactorType8();
+      var getLv2Ch2Sec3InfoType9 = commonFactorType9();
+      var getLv2Ch2Sec3InfoType10 = commonFactorType10();
+      var getLv2Ch2Sec3InfoType11 = commonFactorType11();
+
+      let Lv2Ch2Sec3Question = [
+          {
+          numb: 1,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType1.question + "。",
+          answer: getLv2Ch2Sec3InfoType1.answer,
+          options: getLv2Ch2Sec3InfoType1.option
+        },
+          {
+          numb: 2,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType2.question + "。",
+          answer: getLv2Ch2Sec3InfoType2.answer,
+          options: getLv2Ch2Sec3InfoType2.option
+        },
+          {
+          numb: 3,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType3.question + "。",
+          answer: getLv2Ch2Sec3InfoType3.answer,
+          options: getLv2Ch2Sec3InfoType3.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType4.question + "。",
+          answer: getLv2Ch2Sec3InfoType4.answer,
+          options: getLv2Ch2Sec3InfoType4.option
+        },
+          {
+          numb: 5,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType5.question + "。",
+          answer: getLv2Ch2Sec3InfoType5.answer,
+          options: getLv2Ch2Sec3InfoType5.option
+        },
+          {
+          numb: 6,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType6.question + "。",
+          answer: getLv2Ch2Sec3InfoType6.answer,
+          options: getLv2Ch2Sec3InfoType6.option
+        },
+          {
+          numb: 7,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType7.question + "。",
+          answer: getLv2Ch2Sec3InfoType7.answer,
+          options: getLv2Ch2Sec3InfoType7.option
+        },
+          {
+          numb: 8,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType8.question + "。",
+          answer: getLv2Ch2Sec3InfoType8.answer,
+          options: getLv2Ch2Sec3InfoType8.option
+        },
+          {
+          numb: 9,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType9.question + "。",
+          answer: getLv2Ch2Sec3InfoType9.answer,
+          options: getLv2Ch2Sec3InfoType9.option
+        },
+          {
+          numb: 10,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType10.question + "。",
+          answer: getLv2Ch2Sec3InfoType10.answer,
+          options: getLv2Ch2Sec3InfoType10.option
+        },
+          {
+          numb: 11,
+          question: "因式分解 " + getLv2Ch2Sec3InfoType11.question + "。",
+          answer: getLv2Ch2Sec3InfoType11.answer,
+          options: getLv2Ch2Sec3InfoType11.option
+        },
+        ];
+        quizQuestionNum.innerHTML = " " + Lv2Ch2Sec3Question.length + " ";
+        questionNum.innerHTML = " " + Lv2Ch2Sec3Question.length + " ";
+        quizTimeLimit.innerHTML = " 6 分鐘 ";
+      return Lv2Ch2Sec3Question;
+    }
+
+    //Form 2 Chapter 2 Section 4 - Grouping Terms Method (DONE)
+    function getLv2Ch2Sec4(){
+      mode = "option";
+      timeAllowed = 8;
+      var getLv2Ch2Sec4InfoType1 = groupingFactorType1();
+      var getLv2Ch2Sec4InfoType2 = groupingFactorType2();
+      var getLv2Ch2Sec4InfoType3 = groupingFactorType3();
+      var getLv2Ch2Sec4InfoType4 = groupingFactorType4();
+      var getLv2Ch2Sec4InfoType5 = groupingFactorType5();
+      var getLv2Ch2Sec4InfoType6 = groupingFactorType6();
+      var getLv2Ch2Sec4InfoType7 = groupingFactorType7();
+      var getLv2Ch2Sec4InfoType8 = groupingFactorType8();
+
+      let Lv2Ch2Sec4Question = [
+          {
+          numb: 1,
+          question: "因式分解 " + getLv2Ch2Sec4InfoType1.question + "。",
+          answer: getLv2Ch2Sec4InfoType1.answer,
+          options: getLv2Ch2Sec4InfoType1.option
+        },
+          {
+          numb: 2,
+          question: "因式分解 " + getLv2Ch2Sec4InfoType2.question + "。",
+          answer: getLv2Ch2Sec4InfoType2.answer,
+          options: getLv2Ch2Sec4InfoType2.option
+        },
+          {
+          numb: 3,
+          question: "因式分解 " + getLv2Ch2Sec4InfoType3.question + "。",
+          answer: getLv2Ch2Sec4InfoType3.answer,
+          options: getLv2Ch2Sec4InfoType3.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + getLv2Ch2Sec4InfoType4.question + "。",
+          answer: getLv2Ch2Sec4InfoType4.answer,
+          options: getLv2Ch2Sec4InfoType4.option
+        },
+          {
+          numb: 5,
+          question: "因式分解 " + getLv2Ch2Sec4InfoType5.question + "。",
+          answer: getLv2Ch2Sec4InfoType5.answer,
+          options: getLv2Ch2Sec4InfoType5.option
+        },
+          {
+          numb: 6,
+          question: "因式分解 " + getLv2Ch2Sec4InfoType6.question + "。",
+          answer: getLv2Ch2Sec4InfoType6.answer,
+          options: getLv2Ch2Sec4InfoType6.option
+        },
+          {
+          numb: 7,
+          question: "因式分解 " + getLv2Ch2Sec4InfoType7.question + "。",
+          answer: getLv2Ch2Sec4InfoType7.answer,
+          options: getLv2Ch2Sec4InfoType7.option
+        },
+          {
+          numb: 8,
+          question: "因式分解 " + getLv2Ch2Sec4InfoType8.question + "。",
+          answer: getLv2Ch2Sec4InfoType8.answer,
+          options: getLv2Ch2Sec4InfoType8.option
+        },
+      ];
+      quizQuestionNum.innerHTML = " " + Lv2Ch2Sec4Question.length + " ";
+      questionNum.innerHTML = " " + Lv2Ch2Sec4Question.length + " ";
+      quizTimeLimit.innerHTML = " 8 分鐘 ";
+      return Lv2Ch2Sec4Question;
+    }
+
+    //Form 2 Chapter 2 Section 5 - Factorization - Difference of two Squares (DONE)
+    function getLv2Ch2Sec5(){
+      mode = "option";
+      timeAllowed = 6;
+      var getLv2Ch2Sec5InfoType1 = identityFactorizationType1();
+      var getLv2Ch2Sec5InfoType2 = identityFactorizationType2();
+      var getLv2Ch2Sec5InfoType3 = identityFactorizationType3();
+      var getLv2Ch2Sec5InfoType4 = identityFactorizationType4();
+      var getLv2Ch2Sec5InfoType5 = identityFactorizationType5();
+      var getLv2Ch2Sec5InfoType6 = identityFactorizationType6();
+      var getLv2Ch2Sec5InfoType7 = identityFactorizationType7();
+      var getLv2Ch2Sec5InfoType8 = identityFactorizationType8();
+      var getLv2Ch2Sec5InfoType9 = identityFactorizationType9();
+      var getLv2Ch2Sec5InfoType10 = identityFactorizationType10();
+
+      let Lv2Ch2Sec5Question = [
+          {
+          numb: 1,
+          question: "因式分解 " + getLv2Ch2Sec5InfoType1.question + "。",
+          answer: getLv2Ch2Sec5InfoType1.answer,
+          options: getLv2Ch2Sec5InfoType1.option
+        },
+          {
+          numb: 2,
+          question: "因式分解 " + getLv2Ch2Sec5InfoType2.question + "。",
+          answer: getLv2Ch2Sec5InfoType2.answer,
+          options: getLv2Ch2Sec5InfoType2.option
+        },
+          {
+          numb: 3,
+          question: "因式分解 " + getLv2Ch2Sec5InfoType3.question + "。",
+          answer: getLv2Ch2Sec5InfoType3.answer,
+          options: getLv2Ch2Sec5InfoType3.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + getLv2Ch2Sec5InfoType4.question + "。",
+          answer: getLv2Ch2Sec5InfoType4.answer,
+          options: getLv2Ch2Sec5InfoType4.option
+        },
+          {
+          numb: 5,
+          question: "因式分解 " + getLv2Ch2Sec5InfoType5.question + "。",
+          answer: getLv2Ch2Sec5InfoType5.answer,
+          options: getLv2Ch2Sec5InfoType5.option
+        },
+          {
+          numb: 6,
+          question: "因式分解 " + getLv2Ch2Sec5InfoType6.question + "。",
+          answer: getLv2Ch2Sec5InfoType6.answer,
+          options: getLv2Ch2Sec5InfoType6.option
+        },
+          {
+          numb: 7,
+          question: "因式分解 " + getLv2Ch2Sec5InfoType7.question + "。",
+          answer: getLv2Ch2Sec5InfoType7.answer,
+          options: getLv2Ch2Sec5InfoType7.option
+        },
+          {
+          numb: 8,
+          question: "因式分解 " + getLv2Ch2Sec5InfoType8.question + "。",
+          answer: getLv2Ch2Sec5InfoType8.answer,
+          options: getLv2Ch2Sec5InfoType8.option
+        },
+          {
+          numb: 9,
+          question: "因式分解 " + getLv2Ch2Sec5InfoType9.question + "。",
+          answer: getLv2Ch2Sec5InfoType9.answer,
+          options: getLv2Ch2Sec5InfoType9.option
+        },
+          {
+          numb: 10,
+          question: "因式分解 " + getLv2Ch2Sec5InfoType10.question + "。",
+          answer: getLv2Ch2Sec5InfoType10.answer,
+          options: getLv2Ch2Sec5InfoType10.option
+        },
+        ];
+        quizQuestionNum.innerHTML = " " + Lv2Ch2Sec5Question.length + " ";
+        questionNum.innerHTML = " " + Lv2Ch2Sec5Question.length + " ";
+        quizTimeLimit.innerHTML = " 6 分鐘 ";
+      return Lv2Ch2Sec5Question;
+    }
+
+    //Form 2 Chapter 2 Section 6 - Factorization - Perfect Square (DONE)
+    function getLv2Ch2Sec6(){
+      mode = "option";
+      timeAllowed = 6;
+      var getLv2Ch2Sec6InfoType1 = identityFactorizationType11();
+      var getLv2Ch2Sec6InfoType2 = identityFactorizationType12();
+      var getLv2Ch2Sec6InfoType3 = identityFactorizationType13();
+      var getLv2Ch2Sec6InfoType4 = identityFactorizationType14();
+      var getLv2Ch2Sec6InfoType5 = identityFactorizationType15();
+      var getLv2Ch2Sec6InfoType6 = identityFactorizationType16();
+      var getLv2Ch2Sec6InfoType7 = identityFactorizationType17();
+      var getLv2Ch2Sec6InfoType8 = identityFactorizationType18();
+      var getLv2Ch2Sec6InfoType9 = identityFactorizationType19();
+      var getLv2Ch2Sec6InfoType10 = identityFactorizationType20();
+
+      let Lv2Ch2Sec6Question = [
+          {
+          numb: 1,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType1.question + "。",
+          answer: getLv2Ch2Sec6InfoType1.answer,
+          options: getLv2Ch2Sec6InfoType1.option
+        },
+          {
+          numb: 2,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType2.question + "。",
+          answer: getLv2Ch2Sec6InfoType2.answer,
+          options: getLv2Ch2Sec6InfoType2.option
+        },
+          {
+          numb: 3,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType3.question + "。",
+          answer: getLv2Ch2Sec6InfoType3.answer,
+          options: getLv2Ch2Sec6InfoType3.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType4.question + "。",
+          answer: getLv2Ch2Sec6InfoType4.answer,
+          options: getLv2Ch2Sec6InfoType4.option
+        },
+          {
+          numb: 5,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType5.question + "。",
+          answer: getLv2Ch2Sec6InfoType5.answer,
+          options: getLv2Ch2Sec6InfoType5.option
+        },
+          {
+          numb: 6,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType6.question + "。",
+          answer: getLv2Ch2Sec6InfoType6.answer,
+          options: getLv2Ch2Sec6InfoType6.option
+        },
+          {
+          numb: 7,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType7.question + "。",
+          answer: getLv2Ch2Sec6InfoType7.answer,
+          options: getLv2Ch2Sec6InfoType7.option
+        },
+          {
+          numb: 8,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType8.question + "。",
+          answer: getLv2Ch2Sec6InfoType8.answer,
+          options: getLv2Ch2Sec6InfoType8.option
+        },
+          {
+          numb: 9,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType9.question + "。",
+          answer: getLv2Ch2Sec6InfoType9.answer,
+          options: getLv2Ch2Sec6InfoType9.option
+        },
+          {
+          numb: 10,
+          question: "因式分解 " + getLv2Ch2Sec6InfoType10.question + "。",
+          answer: getLv2Ch2Sec6InfoType10.answer,
+          options: getLv2Ch2Sec6InfoType10.option
+        },
+        ];
+        quizQuestionNum.innerHTML = " " + Lv2Ch2Sec6Question.length + " ";
+        questionNum.innerHTML = " " + Lv2Ch2Sec6Question.length + " ";
+        quizTimeLimit.innerHTML = " 6 分鐘 ";
+      return Lv2Ch2Sec6Question;
+    }
+
+    //Form 2 Chapter 2 Section 7 - Identity Expansion Revision (DONE)
+    function getLv2Ch2Sec7(){
+      mode = "option";
+      timeAllowed = 6;
+      var getLv2Ch2Sec7InfoType1 = identityExpansionType1();
+      var getLv2Ch2Sec7InfoType2 = identityExpansionType11();
+      var getLv2Ch2Sec7InfoType3 = identityExpansionType12();
+      var getLv2Ch2Sec7InfoType4 = identityExpansionType3();
+      var getLv2Ch2Sec7InfoType5 = identityExpansionType6();
+      var getLv2Ch2Sec7InfoType6 = identityExpansionType13();
+      var getLv2Ch2Sec7InfoType7 = identityExpansionType16();
+      var getLv2Ch2Sec7InfoType8 = identityExpansionType8();
+      var getLv2Ch2Sec7InfoType9 = identityExpansionType9();
+      var getLv2Ch2Sec7InfoType10 = identityExpansionType20();
+
+      let Lv2Ch2Sec7Question = [
+          {
+          numb: 1,
+          question: "展開 " + getLv2Ch2Sec7InfoType1.question + "。",
+          answer: getLv2Ch2Sec7InfoType1.answer,
+          options: getLv2Ch2Sec7InfoType1.option
+        },
+          {
+          numb: 2,
+          question: "展開 " + getLv2Ch2Sec7InfoType2.question + "。",
+          answer: getLv2Ch2Sec7InfoType2.answer,
+          options: getLv2Ch2Sec7InfoType2.option
+        },
+          {
+          numb: 3,
+          question: "展開 " + getLv2Ch2Sec7InfoType3.question + "。",
+          answer: getLv2Ch2Sec7InfoType3.answer,
+          options: getLv2Ch2Sec7InfoType3.option
+        },
+          {
+          numb: 4,
+          question: "展開 " + getLv2Ch2Sec7InfoType4.question + "。",
+          answer: getLv2Ch2Sec7InfoType4.answer,
+          options: getLv2Ch2Sec7InfoType4.option
+        },
+          {
+          numb: 5,
+          question: "展開 " + getLv2Ch2Sec7InfoType5.question + "。",
+          answer: getLv2Ch2Sec7InfoType5.answer,
+          options: getLv2Ch2Sec7InfoType5.option
+        },
+          {
+          numb: 6,
+          question: "展開 " + getLv2Ch2Sec7InfoType6.question + "。",
+          answer: getLv2Ch2Sec7InfoType6.answer,
+          options: getLv2Ch2Sec7InfoType6.option
+        },
+          {
+          numb: 7,
+          question: "展開 " + getLv2Ch2Sec7InfoType7.question + "。",
+          answer: getLv2Ch2Sec7InfoType7.answer,
+          options: getLv2Ch2Sec7InfoType7.option
+        },
+          {
+          numb: 8,
+          question: "展開 " + getLv2Ch2Sec7InfoType8.question + "。",
+          answer: getLv2Ch2Sec7InfoType8.answer,
+          options: getLv2Ch2Sec7InfoType8.option
+        },
+          {
+          numb: 9,
+          question: "展開 " + getLv2Ch2Sec7InfoType9.question + "。",
+          answer: getLv2Ch2Sec7InfoType9.answer,
+          options: getLv2Ch2Sec7InfoType9.option
+        },
+          {
+          numb: 10,
+          question: "展開 " + getLv2Ch2Sec7InfoType10.question + "。",
+          answer: getLv2Ch2Sec7InfoType10.answer,
+          options: getLv2Ch2Sec7InfoType10.option
+        },
+        ];
+        quizQuestionNum.innerHTML = " " + Lv2Ch2Sec7Question.length + " ";
+        questionNum.innerHTML = " " + Lv2Ch2Sec7Question.length + " ";
+        quizTimeLimit.innerHTML = " 6 分鐘 ";
+      return Lv2Ch2Sec7Question;
+    }
+
+    //Form 2 Chapter 2 Section 8 - Simple Factorization Revision (DONE)
+    function getLv2Ch2Sec8(){
+      mode = "option";
+      timeAllowed = 8;
+      var getLv2Ch2Sec8InfoType1 = commonFactorType2();
+      var getLv2Ch2Sec8InfoType2 = commonFactorType3();
+      var getLv2Ch2Sec8InfoType3 = commonFactorType4();
+      var getLv2Ch2Sec8InfoType4 = commonFactorType6();
+      var getLv2Ch2Sec8InfoType5 = commonFactorType7();
+      var getLv2Ch2Sec8InfoType6 = commonFactorType8();
+      var getLv2Ch2Sec8InfoType7 = commonFactorType10();
+      var getLv2Ch2Sec8InfoType8 = commonFactorType11();
+      var getLv2Ch2Sec8InfoType9 = groupingFactorType4();
+      var getLv2Ch2Sec8InfoType10 = groupingFactorType5();
+
+      let Lv2Ch2Sec8Question = [
+          {
+          numb: 1,
+          question: "因式分解 " + getLv2Ch2Sec8InfoType1.question + "。",
+          answer: getLv2Ch2Sec8InfoType1.answer,
+          options: getLv2Ch2Sec8InfoType1.option
+        },
+          {
+          numb: 2,
+          question: "因式分解 " + getLv2Ch2Sec8InfoType2.question + "。",
+          answer: getLv2Ch2Sec8InfoType2.answer,
+          options: getLv2Ch2Sec8InfoType2.option
+        },
+          {
+          numb: 3,
+          question: "因式分解 " + getLv2Ch2Sec8InfoType3.question + "。",
+          answer: getLv2Ch2Sec8InfoType3.answer,
+          options: getLv2Ch2Sec8InfoType3.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + getLv2Ch2Sec8InfoType4.question + "。",
+          answer: getLv2Ch2Sec8InfoType4.answer,
+          options: getLv2Ch2Sec8InfoType4.option
+        },
+          {
+          numb: 5,
+          question: "因式分解 " + getLv2Ch2Sec8InfoType5.question + "。",
+          answer: getLv2Ch2Sec8InfoType5.answer,
+          options: getLv2Ch2Sec8InfoType5.option
+        },
+          {
+          numb: 6,
+          question: "因式分解 " + getLv2Ch2Sec8InfoType6.question + "。",
+          answer: getLv2Ch2Sec8InfoType6.answer,
+          options: getLv2Ch2Sec8InfoType6.option
+        },
+          {
+          numb: 7,
+          question: "因式分解 " + getLv2Ch2Sec8InfoType7.question + "。",
+          answer: getLv2Ch2Sec8InfoType7.answer,
+          options: getLv2Ch2Sec8InfoType7.option
+        },
+          {
+          numb: 8,
+          question: "因式分解 " + getLv2Ch2Sec8InfoType8.question + "。",
+          answer: getLv2Ch2Sec8InfoType8.answer,
+          options: getLv2Ch2Sec8InfoType8.option
+        },
+          {
+          numb: 9,
+          question: "因式分解 " + getLv2Ch2Sec8InfoType9.question + "。",
+          answer: getLv2Ch2Sec8InfoType9.answer,
+          options: getLv2Ch2Sec8InfoType9.option
+        },
+          {
+          numb: 10,
+          question: "因式分解 " + getLv2Ch2Sec8InfoType10.question + "。",
+          answer: getLv2Ch2Sec8InfoType10.answer,
+          options: getLv2Ch2Sec8InfoType10.option
+        },
+        ];
+        quizQuestionNum.innerHTML = " " + Lv2Ch2Sec8Question.length + " ";
+        questionNum.innerHTML = " " + Lv2Ch2Sec8Question.length + " ";
+        quizTimeLimit.innerHTML = " 8 分鐘 ";
+      return Lv2Ch2Sec8Question;
+    }
+
+    //Form 2 Chapter 2 Section 9 - Identity Factorization Revision (DONE)
+    function getLv2Ch2Sec9(){
+      mode = "option";
+      timeAllowed = 8;
+      var getLv2Ch2Sec9InfoType1 = identityFactorizationType2();
+      var getLv2Ch2Sec9InfoType2 = identityFactorizationType11();
+      var getLv2Ch2Sec9InfoType3 = identityFactorizationType12();
+      var getLv2Ch2Sec9InfoType4 = identityFactorizationType3();
+      var getLv2Ch2Sec9InfoType5 = identityFactorizationType5();
+      var getLv2Ch2Sec9InfoType6 = identityFactorizationType13();
+      var getLv2Ch2Sec9InfoType7 = identityFactorizationType14();
+      var getLv2Ch2Sec9InfoType8 = identityFactorizationType17();
+      var getLv2Ch2Sec9InfoType9 = identityFactorizationType18();
+      var getLv2Ch2Sec9InfoType10 = identityFactorizationType7()
+
+      let Lv2Ch2Sec9Question = [
+          {
+          numb: 1,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType1.question + "。",
+          answer: getLv2Ch2Sec9InfoType1.answer,
+          options: getLv2Ch2Sec9InfoType1.option
+        },
+          {
+          numb: 2,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType2.question + "。",
+          answer: getLv2Ch2Sec9InfoType2.answer,
+          options: getLv2Ch2Sec9InfoType2.option
+        },
+          {
+          numb: 3,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType3.question + "。",
+          answer: getLv2Ch2Sec9InfoType3.answer,
+          options: getLv2Ch2Sec9InfoType3.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType4.question + "。",
+          answer: getLv2Ch2Sec9InfoType4.answer,
+          options: getLv2Ch2Sec9InfoType4.option
+        },
+          {
+          numb: 5,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType5.question + "。",
+          answer: getLv2Ch2Sec9InfoType5.answer,
+          options: getLv2Ch2Sec9InfoType5.option
+        },
+          {
+          numb: 6,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType6.question + "。",
+          answer: getLv2Ch2Sec9InfoType6.answer,
+          options: getLv2Ch2Sec9InfoType6.option
+        },
+          {
+          numb: 7,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType7.question + "。",
+          answer: getLv2Ch2Sec9InfoType7.answer,
+          options: getLv2Ch2Sec9InfoType7.option
+        },
+          {
+          numb: 8,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType8.question + "。",
+          answer: getLv2Ch2Sec9InfoType8.answer,
+          options: getLv2Ch2Sec9InfoType8.option
+        },
+          {
+          numb: 9,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType9.question + "。",
+          answer: getLv2Ch2Sec9InfoType9.answer,
+          options: getLv2Ch2Sec9InfoType9.option
+        },
+          {
+          numb: 10,
+          question: "因式分解 " + getLv2Ch2Sec9InfoType10.question + "。",
+          answer: getLv2Ch2Sec9InfoType10.answer,
+          options: getLv2Ch2Sec9InfoType10.option
+        },
+        ];
+        quizQuestionNum.innerHTML = " " + Lv2Ch2Sec9Question.length + " ";
+        questionNum.innerHTML = " " + Lv2Ch2Sec9Question.length + " ";
+        quizTimeLimit.innerHTML = " 8 分鐘 ";
+      return Lv2Ch2Sec9Question;
+    }
+
+    //Form 3 Chapter 1 Section 1 - Factorization - Cross Method 1 (DONE)
+    function getLv3Ch1Sec1(){
+      mode = "option";
+      timeAllowed = 8;
+      var question1Info = factorizationCrossMethodOneType1();
+      var question2Info = factorizationCrossMethodOneType2();
+      var question3Info = factorizationCrossMethodOneType3();
+      var question4Info = factorizationCrossMethodOneType4();
+      var question5Info = factorizationCrossMethodOneType5();
+      var question6Info = factorizationCrossMethodOneType6();
+      var question7Info = factorizationCrossMethodOneType7();
+      var question8Info = factorizationCrossMethodOneType8();
+      var question9Info = factorizationCrossMethodOneType9();
+      var question10Info = factorizationCrossMethodOneType10();
+
+      let Lv3Ch1Sec1Question = [
+          {
+          numb: 1,
+          question: "因式分解 " + question1Info.question + "。",
+          answer: question1Info.answer,
+          options: question1Info.option
+        },
+          {
+        numb: 2,
+        question: "因式分解 " + question2Info.question + "。",
+        answer: question2Info.answer,
+        options: question2Info.option
+        },
+          {
+        numb: 3,
+        question: "因式分解 " + question3Info.question + "。",
+        answer: question3Info.answer,
+        options: question3Info.option
+        },
+          {
+          numb: 4,
+          question: "因式分解 " + question4Info.question + "。",
+          answer: question4Info.answer,
+          options: question4Info.option
+        },
+          {
+          numb: 5,
+          question: "因式分解 " + question5Info.question + "。",
+          answer: question5Info.answer,
+          options: question5Info.option
+        },
+          {
+          numb: 6,
+          question: "因式分解 " + question6Info.question + "。",
+          answer: question6Info.answer,
+          options: question6Info.option
+        },
+          {
+          numb: 7,
+          question: "因式分解 " + question7Info.question + "。",
+          answer: question7Info.answer,
+          options: question7Info.option
+        },
+          {
+          numb: 8,
+          question: "因式分解 " + question8Info.question + "。",
+          answer: question8Info.answer,
+          options: question8Info.option
+        },
+          {
+          numb: 9,
+          question: "因式分解 " + question9Info.question + "。",
+          answer: question9Info.answer,
+          options: question9Info.option
+        },
+          {
+          numb: 10,
+          question: "因式分解 " + question10Info.question + "。",
+          answer: question10Info.answer,
+          options: question10Info.option
+        },
+      ];
+
+        quizQuestionNum.innerHTML = " " + Lv3Ch1Sec1Question.length + " ";
+        questionNum.innerHTML = " " + Lv3Ch1Sec1Question.length + " ";
+        quizTimeLimit.innerHTML = " 8 分鐘 ";
+
+      return Lv3Ch1Sec1Question;
+      }
+
+    //Form 3 Chapter 1 Section 2 - Factorization - Cross Method 2 (DONE)
+    function getLv3Ch1Sec2(){
+      mode = "option";
+        timeAllowed = 8;
+        var question1Info = factorizationCrossMethodTwoType1();
+        var question2Info = factorizationCrossMethodTwoType2();
+        var question3Info = factorizationCrossMethodTwoType3();
+        var question4Info = factorizationCrossMethodTwoType4();
+        var question5Info = factorizationCrossMethodTwoType5();
+        var question6Info = factorizationCrossMethodTwoType6();
+        var question7Info = factorizationCrossMethodTwoType7();
+        var question8Info = factorizationCrossMethodTwoType8();
+
+
+        let Lv3Ch1Sec2Question = [
+            {
+            numb: 1,
+            question: "因式分解 " + question1Info.question + "。",
+            answer: question1Info.answer,
+            options: question1Info.option
+          },
+            {
+            numb: 2,
+            question: "因式分解 " + question2Info.question + "。",
+            answer: question2Info.answer,
+            options: question2Info.option
+          },
+            {
+            numb: 3,
+            question: "因式分解 " + question3Info.question + "。",
+            answer: question3Info.answer,
+            options: question3Info.option
+          },
+            {
+            numb: 4,
+            question: "因式分解 " + question4Info.question + "。",
+            answer: question4Info.answer,
+            options: question4Info.option
+          },
+            {
+            numb: 5,
+            question: "因式分解 " + question5Info.question + "。",
+            answer: question5Info.answer,
+            options: question5Info.option
+          },
+            {
+            numb: 6,
+            question: "因式分解 " + question6Info.question + "。",
+            answer: question6Info.answer,
+            options: question6Info.option
+          },
+            {
+            numb: 7,
+            question: "因式分解 " + question7Info.question + "。",
+            answer: question7Info.answer,
+            options: question7Info.option
+          },
+            {
+            numb: 8,
+            question: "因式分解 " + question8Info.question + "。",
+            answer: question8Info.answer,
+            options: question8Info.option
+          },
+        ];
+
+          quizQuestionNum.innerHTML = " " + Lv3Ch1Sec2Question.length + " ";
+          questionNum.innerHTML = " " + Lv3Ch1Sec2Question.length + " ";
+          quizTimeLimit.innerHTML = " 8 分鐘 ";
+
+        return Lv3Ch1Sec2Question;
+        }
+
+    //-----------------------show question and options------------------//
+    function showQuestions(index) {
+      const que_text = document.querySelector(".que_text");
+      const option_list = document.querySelector(".option_list");
+      const answer_input = document.querySelector(".answerInputBox");
+      //creating a new span and div tag for question and option and passing the value using array index
+
+      let que_tag =
+        "<span>" +
+        quizDetail[index].numb +
+        ". " +
+        quizDetail[index].question +
+        "</span>";
+        que_text.innerHTML = que_tag; //adding new span tag inside que_tag
+        var el = document.getElementsByClassName("que_text");
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, el]);
+      if(mode=="option"){
+        let option_tag =
+          '<div class="option" id="optionA"><span>' +
+          quizDetail[index].options[0] +
+          "</span></div>" +
+          '<div class="option" id="optionB"><span>' +
+          quizDetail[index].options[1] +
+          "</span></div>" +
+          '<div class="option" id="optionC"><span>' +
+          quizDetail[index].options[2] +
+          "</span></div>" +
+          '<div class="option" id="optionD"><span>' +
+          quizDetail[index].options[3] +
+          "</span></div>";
+        option_list.innerHTML = option_tag; //adding new div tag inside option_tag
+        var el = document.getElementsByClassName("option");
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, el]);
+        const option = option_list.querySelectorAll(".option");
+
+        // set onclick attribute to all available options
+        for (i = 0; i < option.length; i++) {
+          option[i].setAttribute("onclick", "optionSelected(this)");
+        }
+      }else if(mode=="input"){
+        let input_tag =
+          '<div class="answerBox"><input id="inputAnswer"><span></span><label><b>在此輸入答案 (可用 2/3 表示 $\\frac{2}{3}$)</b></label></input></div>';
+        answer_input.innerHTML = input_tag; //adding new div tag inside option_tag
+        var el = document.getElementsByClassName("answerBox");
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, el]);
+      }
+    }
+
+    //-----------------option selected-------------------//
+    function optionSelected(answer){
+      let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
+      let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
+
+      let userAns = answer.id; //getting user selected option
+      user_option = answer.id;
+      let correcAns = quizDetail[que_count].answer; //getting correct answer from array
+      const allOptions = option_list.children.length; //getting all option items
+
+      if (answer.id == correcAns) {
+        //if user selected option is equal to array's correct answer
+        userScore += 1; //upgrading score value with 1
+        score.innerHTML = userScore + " ";
+        answer.classList.add("correct"); //adding green color to correct selected option
+        answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
+      } else {
+        answer.classList.add("incorrect"); //adding red color to correct selected option
+        answer.insertAdjacentHTML("beforeend", crossIconTag); //adding cross icon to correct selected option
+
+        for (i = 0; i < allOptions; i++) {
+          if (option_list.children[i].id == correcAns) {
+            //if there is an option which is matched to an array answer
+            option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
+            option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
+          }
+        }
+      }
+      for (i = 0; i < allOptions; i++) {
+        option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
+      }
+      if(que_count == quizDetail.length - 1){
+        next_btn.innerHTML = "完成挑戰";
+        clearInterval(countTime); //clear counter
+        clearInterval(counterLine); //clear counterLine
+      }
+      next_btn.style.display = "block"; //show the next button if user selected any option
+    }
+
+    function submitAnswer(){
+      var simplify = "true";
+      var input_answer = document.getElementById("inputAnswer").value;
+      var splitArray = input_answer.split("/");
+      if(Number.isInteger(parseFloat(splitArray[0]))&&Number.isInteger(parseFloat(splitArray[1]))){
+        input_answer = parseFloat(splitArray[0])/parseFloat(splitArray[1]);
+          if(gcd_two_numbers(parseFloat(splitArray[0]), parseFloat(splitArray[1]))!=1)
+            simplify = "false";
+      }
+
+      if(document.getElementById("inputAnswer").value.length == 0){
+        alert("請輸入你的答案");
+      }else if(isNaN(input_answer)){
+        alert("請輸入數值");
+      }else if(input_answer == quizDetail[que_count].answer && simplify=="true" && parseFloat(splitArray[1])!=1){
+        inputRespon.innerHTML = "答案正確！";
+        userScore += 1; //upgrading score value with 1
+        score.innerHTML = userScore + " ";
+        if(que_count == quizDetail.length - 1){
+          next_btn.innerHTML = "完成挑戰";
+          clearInterval(countTime); //clear counter
+          clearInterval(counterLine); //clear counterLine
+        }
+        // document.getElementById("inputAnswer").disabled = true;
+        submitAnswer_btn.style.display = "none";
+        next_btn.style.display = "block";
+      }else{
+        if(Number.isInteger(quizDetail[que_count].answer))
+          inputRespon.innerHTML = "錯誤，正確答案為 " + quizDetail[que_count].answer + "。";
+        else{
+          if(quizDetail[que_count].numerator*quizDetail[que_count].denominator>=0)
+            inputRespon.innerHTML = "錯誤，正確答案為 $\\frac{" + quizDetail[que_count].numerator + "}{" + quizDetail[que_count].denominator  + "}$。";
+            else{
+              inputRespon.innerHTML = "錯誤，正確答案為 $-\\frac{" + Math.abs(quizDetail[que_count].numerator) + "}{" + Math.abs(quizDetail[que_count].denominator)  + "}$。";
+            }
+          var el = document.getElementsByClassName("input_respon");
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub, el]);
+        }
+        if(que_count == quizDetail.length - 1){
+          next_btn.innerHTML = "完成挑戰";
+          clearInterval(countTime); //clear counter
+          clearInterval(counterLine); //clear counterLine
+      }
+      // document.getElementById("inputAnswer").disabled = true;
+      submitAnswer_btn.style.display = "none";
+      next_btn.style.display = "block";
+      }
+    }
+
+    //--------------------next_btn is clicked----------------------//
+    function nextQuestionBtn(){
+      que_count++;
+      if(mode=="input"){
+        submitAnswer_btn.style.display = "block";
+        next_btn.style.display = "none";
+        inputRespon.innerHTML = "";
+      }
+      if (que_count <= quizDetail.length - 1) {
+        //if question count is less than total question length
+        showQuestions(que_count); //calling showQestions function
+        next_btn.style.display = "none"; //hide the next button
+      } else {
+        document.getElementById("mcQuizBox").style.display = "none";
+        document.getElementById("resultBox").style.display = "block";
+      }
+    }
+
+    //------------------------timer and timer line----------------------//
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        var sec = 0;
+        const time_line = document.querySelector("header .time_line");
+        countTime = setInterval(function () {
+          --timer;
+
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+            if (timer < 0) {
+                display.textContent = "00:00";
+                clearInterval(countTime);
+            }
+
+        }, 1000);
+
+        counterLine = setInterval(function () {
+            time_line.style.width = 4*sec/duration + "px";
+            sec++;
+            if(4*sec/duration == 400)
+              clearInterval(counterLine);
+        }, 10);
+
+
+    }
+
+    //----------------------back to start page----------------------//
+    function logout(){
+      window.location.reload();
+    }
+
+</script>
+
+</body>
+</html>
